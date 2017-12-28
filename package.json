@@ -24,6 +24,7 @@
     "jshint": "^2.9.5",
     "jshint-loader": "^0.8.4",
     "node-libs-browser": "^2.1.0",
+    "strip-loader": "^0.1.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   }
