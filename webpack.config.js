@@ -5,6 +5,13 @@ module.exports = {
     },
     watch : true,
     module : {
+        rules : [
+            {
+                test :/\.js$/,
+                exclude : /node_modules/,
+                loader: 'jshint-loader'
+            }
+        ],
         loaders : [
             {
                 test :/\.es6$/,
