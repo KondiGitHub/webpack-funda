@@ -1,0 +1,24 @@
+{
+  "name": "webpack-funda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KondiGitHub/webpack-funda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KondiGitHub/webpack-funda/issues"
+  },
+  "homepage": "https://github.com/KondiGitHub/webpack-funda#readme",
+  "dependencies": {
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}
