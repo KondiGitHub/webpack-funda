@@ -24,9 +24,9 @@ module.exports = {
                 loader: 'style-loader!css-loader'
             },
             {
-                test :/\.scss$/,
+                test :/\.less$/,
                 exclude : /node_modules/,
-                loader: 'style-loader!css-loader!sass-loader'
+                loader: 'style-loader!css-loader!less-loader'
             }
         ]
     },
