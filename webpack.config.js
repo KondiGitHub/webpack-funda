@@ -37,10 +37,10 @@ module.exports = {
                 })
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|ttf|eot)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'url-loader?limit=100000'
+                    loader: 'url-loader?limit=10000'
                 }
             }
         ],
