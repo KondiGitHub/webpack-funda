@@ -21,7 +21,6 @@ module.exports = {
     },
     watch : true,
     module : {
-
         rules: [
             {
                 test: /\.css$/,
@@ -36,6 +35,13 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ["css-loader","autoprefixer-loader","less-loader"]
                 })
+            },
+            {
+                test: /\.(png|jpg)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'url-loader?limit=100000'
+                }
             }
         ],
     },
