@@ -27,14 +27,14 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: ["css-loader","autoprefixer-loader"]
                 })
             },
             {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ["css-loader","less-loader"]
+                    use: ["css-loader","autoprefixer-loader","less-loader"]
                 })
             }
         ],
@@ -48,6 +48,6 @@ module.exports = {
             }),
     ],
     resolve:{
-        extensions:['.js','.es6','css','less']
+        extensions:['.js','.es6']
     }
 };
