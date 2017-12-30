@@ -1,37 +1,62 @@
-var express = require('express');
+var Hapi = require('hapi');
 var path = require('path');
-var logger = require('morgan');
-var routes = require('./routes/index');
-var app = express();
+const Webpack = require('webpack');
+const Config = require('./webpack.config.js');
 
-app.set('views',path.join(__dirname,'views'));
-app.set('view engine','ejs');
-app.use(logger('dev'));
-app.use('/',routes);
+const host = 'localhost';
+const port = 8000;
+var server = new Hapi.Server();
 
-if(app.get('env') === 'development') {
-    var webpackMiddleware = require('webpack-dev-middleware');
-    var webpack = require('webpack');
-
-    var config = require('./webpack.config');
-
-    app.use(webpackMiddleware(webpack(config), {
-        publicPath: '/build',
-        headers: {'X-Custom-Webpack-Header': "yes"},
-
-        stats: {
-            colors: true
-        }
-
-    }));
-}
-
-app.use(function (req,res,next) {
-   var err = new Error("Not Found");
-   err.status = 404;
-   next(err);
+server.connection({
+    host,
+    port
 });
 
-var server = app.listen(8000,function () {
-    console.log('listening on port 8000');
+const compiler = Webpack(Config);
+
+const devMiddleware = require('webpack-dev-middleware')(compiler, {
+    host,
+    port,
+    historyApiFallback: true,
+    publicPath: Config.output.publicPath
+});
+
+server.ext('onRequest', function(request, reply) {
+
+    devMiddleware(request.raw.req, request.raw.res, (err) => {
+
+        if (err) {
+            return reply(err);
+        }
+        reply.continue();
+    });
+});
+server.register({
+    register: require('vision'),
+    once: true
+});
+
+server.views({
+    engines: {
+        html: require('handlebars')
+    },
+    path: './views'
+});
+
+// Non Api Routes
+server.route({
+    path: "/",
+    method: "GET",
+    handler: function (request,reply) {
+        reply.view('index',{title: 'Basic Express App'});
+    }
+});
+
+
+server.start(function (err) {
+    if(err) {
+        console.log("Sorry error");
+    }
+    console.log("server started on port "+server.info.port);
+
 });
