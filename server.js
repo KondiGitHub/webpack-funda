@@ -19,7 +19,7 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
     port,
     historyApiFallback: true,
     publicPath: Config.output.publicPath,
-    headers: {"X-Custom-Webpack-Header": "yes"}
+    headers: {"X-Custom-Webpack-Header": "YES"}
 });
 
 server.ext('onRequest', function(request, reply) {
