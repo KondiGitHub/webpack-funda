@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-    context: path.resolve('public/js'),
+    context: path.resolve('js'),
     entry: './app',
     output : {
         path: path.resolve('build/'),
@@ -15,9 +15,9 @@ module.exports = {
     module : {
         loaders: [
             {
-                test: /\.css$/,
+                test: /\.json$/,
                 exclude: /node_modules/,
-                loader: "style-loader!css-loader"
+                loader: "json-loader!" + path.resolve('loaders/strip')
             }
         ],
     },
